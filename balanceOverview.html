@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance Overview</title>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="./css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" integrity="sha384-tViUnnbYAV00FLIhhi3v/dWt3Jxw4gZQcNoSCxCIFNJVCx7/D55/wXsrNIRANwdD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+<body>
+    <div class="container position-relative">
+
+        <div class="addGroupModal">
+                    <!-- Create New Group Modal -->
+                    <div class="modal fade" id="createGroupModal" tabindex="-1" aria-labelledby="createGroupModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="createGroupModalLabel">Create New Group</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="modal-body">
+                            <form id="createGroupForm">
+                            <!-- Group Name -->
+                            <div class="mb-3">
+                                <label for="groupName" class="form-label">Group Name</label>
+                                <input type="text" class="form-control" id="groupName" placeholder="Enter group name" required>
+                            </div>
+
+                            <!-- Add Members -->
+                            <div id="membersList">
+                                <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Name" required>
+                                </div>
+                                <div class="col">
+                                    <input type="email" class="form-control" placeholder="Email" required>
+                                </div>
+                                </div>
+
+                                <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Name"/>
+                                </div>
+                                <div class="col">
+                                    <input type="email" class="form-control" placeholder="Email"/>
+                                </div>
+                                </div>
+
+                                <div class="row g-2 mb-2">
+                                <div class="col">
+                                    <input type="text" class="form-control" placeholder="Name"/>
+                                </div>
+                                <div class="col">
+                                    <input type="email" class="form-control" placeholder="Email"/>
+                                </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <a href="#" id="addMoreMembers" class="text-primary" style="text-decoration: none;">+ Add More Members</a>
+                            </div>
+
+                            <!-- Category -->
+                            <div class="mb-3">
+                                <label for="category" class="form-label">Category</label>
+                                <select class="form-select" id="category">
+                                <option selected disabled>Select category</option>
+                                <option value="trip">Trip</option>
+                                <option value="party">Party</option>
+                                <option value="office">Office</option>
+                                <option value="others">Others</option>
+                                </select>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Description</label>
+                                <textarea class="form-control" id="description" rows="3" placeholder="Add a description for your group"></textarea>
+                            </div>
+
+                            </form>
+                        </div>
+
+                        <!-- Modal Footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="createGroupBtn">Create Group</button>
+                        </div>
+
+                        </div>
+                    </div>
+                    </div>
+        </div>
+
+        <Header>
+            <div class="header d-flex justify-content-between align-items-center py-3">
+                <div>
+                    <h3 class="fw-bold">SPLIT PAYMENT APP</h3>
+                </div>
+                <div class="userIconContainer d-flex justify-content-center align-items-center rounded-circle p-3" style="background-color: rgb(219 220 244);">
+                    <i class="fa-solid fa-user" style="color: #0049c7;"></i>
+                </div>
+            </div>
+        </Header>
+
+        <div class="px-4 py-3 rounded" style="background-color: #f0f8ff; margin-bottom: 100px;">
+            <div class="balanceOverviewTitle">
+                <div>
+                    <h4 class="fw-bold fs-5 px-0"> 
+                        Balance Overview
+                    </h4>
+                </div>
+            </div>
+    
+            <div class="TotalBalances bg-white px-3 py-2 rounded mt-3">
+                <div class="TotalBalancesTitle my-2 d-flex align-items-center justify-content-sm-between justify-content-center">
+                    <h4 class="fw-medium" style="font-size: 1.1rem;">Total Balances</h4>
+                </div>
+                <div class="balanceDetails col-12 d-flex flex-wrap align-items-center justify-content-between">
+                    <div class="totalBalance col-12 d-flex align-items-center justify-content-center mb-1 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-11 px-3 py-2 rounded d-flex flex-column row-gap-1" style="background-color: #eefde8;">
+                            <h6 class="m-0 fw-medium text-secondary">Total you are owed</h6>
+                            <p class="totalAmount m-0"><span class="fw-bold totalOwesYou" style="color: green;">$395</span></p>
+                        </div>
+    
+                    </div>
+                    <div class="totalBalance col-12 d-flex align-items-center justify-content-center mb-1 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-11 px-3 py-2 rounded d-flex flex-column row-gap-1" style="background-color: #fce9ed;">
+                            <h6 class="m-0 fw-medium text-secondary">Total you owe</h6>
+                            <p class="totalAmount m-0"><span class="fw-bold totalYouOwes" style="color: red;">$195</span></p>
+                        </div>
+    
+                    </div>
+                    <div class="totalBalance col-12 d-flex align-items-center justify-content-center mb-1 col-sm-12 col-md-6 col-lg-4">
+                        <div class="col-11 px-3 py-2 rounded d-flex flex-column row-gap-1" style="background-color: #eefde8;">
+                            <h6 class="m-0 fw-medium text-secondary">Net balance</h6>
+                            <p class="totalAmount m-0"><span class="fw-bold netBalance" style="color: green;">$200</span></p>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+
+            <div class="SimplifiedSettlementSection bg-white px-3 py-2 mt-3 rounded">
+                <div class="SimplifiedSettlementTitleSection d-flex flex-wrap align-items-center justify-content-center justify-content-sm-between">
+                    <div class="SimplifiedSettlementTitle my-1 my-sm-3">
+                        <h4 class="fw-medium" style="font-size: 1.1rem;">Simplified Settlement</h4>
+                    </div>
+                    <div class="recordPaymentBtn mb-3 mb-sm-0">
+                        <div class="recordPaymentModal">
+                            <!-- Record Payment Modal -->
+                            <div class="modal fade" id="recordPaymentModal" tabindex="2" aria-labelledby="recordPaymentLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="recordPaymentLabel">Record Payment</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+
+                                <!-- Modal Body -->
+                                <div class="modal-body">
+                                    <form>
+
+                                    <!-- To (Select Person) -->
+                                    <div class="mb-3">
+                                        <label for="paymentTo" class="form-label">To</label>
+                                        <select class="form-select" id="paymentTo">
+                                        <option selected>Select a person</option>
+                                        <option>Friend 1</option>
+                                        <option>Friend 2</option>
+                                        <option>Friend 3</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Amount -->
+                                    <div class="mb-3">
+                                        <label for="paymentAmount" class="form-label">Amount</label>
+                                        <input type="number" class="form-control" id="paymentAmount" placeholder="$ 0.00">
+                                    </div>
+
+                                    <!-- Note (Optional) -->
+                                    <div class="mb-3">
+                                        <label for="paymentNote" class="form-label">Note (Optional)</label>
+                                        <input type="text" class="form-control" id="paymentNote" placeholder="Add a note about this payment">
+                                    </div>
+
+                                    </form>
+                                </div>
+
+                                <!-- Modal Footer -->
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" id="recordPaymentBtn">Record Payment</button>
+                                </div>
+
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <button  class="btn btn-primary fw-medium" style="font-size: 0.8rem;" data-bs-toggle="modal" data-bs-target="#recordPaymentModal">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                            Record Payment
+                        </button>
+                    </div>
+                </div>
+
+                <div class="membersList px-sm-3">
+                    <div class="member d-flex align-items-center justify-content-between">
+                        <div class="memberName d-flex align-items-center justify-content-start">
+                            <p class="fw-medium px-3 py-2 me-2 rounded-circle m-0" style="background-color: #e5e5ff" ><span style="color: darkblue;">Y</span></p>
+                            <p class="memberName m-0 fw-medium">Yash</p>
+                        </div>
+                        <div class="amountGot d-flex align-items-center column-gap-2">
+                            <p class="m-0 fw-medium" style="font-size: 0.9rem;">owes you $40</p>
+                            <i class="fa-solid fa-bell text-primary"></i>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="member d-flex align-items-center justify-content-between">
+                        <div class="memberName d-flex align-items-center justify-content-start">
+                            <p class="fw-medium px-3 py-2 me-2 rounded-circle m-0" style="background-color: #e5e5ff" ><span style="color: darkblue;">Y</span></p>
+                            <p class="memberName m-0 fw-medium">Yash</p>
+                        </div>
+                        <div class="amountGot d-flex align-items-center column-gap-2">
+                            <p class="m-0 fw-medium text-danger" style="font-size: 0.9rem;">owes you $40</p>
+                            <i class="fa-solid fa-bell text-primary"></i>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="member d-flex align-items-center justify-content-between">
+                        <div class="memberName d-flex align-items-center justify-content-start">
+                            <p class="fw-medium px-3 py-2 me-2 rounded-circle m-0" style="background-color: #e5e5ff" ><span style="color: darkblue;">Y</span></p>
+                            <p class="memberName m-0 fw-medium">Yash</p>
+                        </div>
+                        <div class="amountGot d-flex align-items-center column-gap-2">
+                            <p class="m-0 fw-medium" style="font-size: 0.9rem;">owes you $40</p>
+                            <i class="fa-solid fa-bell text-primary"></i>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="member d-flex align-items-center justify-content-between">
+                        <div class="memberName d-flex align-items-center justify-content-start">
+                            <p class="fw-medium px-3 py-2 me-2 rounded-circle m-0" style="background-color: #e5e5ff" ><span style="color: darkblue;">Y</span></p>
+                            <p class="memberName m-0 fw-medium">Yash</p>
+                        </div>
+                        <div class="amountGot d-flex align-items-center column-gap-2">
+                            <p class="m-0 fw-medium text-danger" style="font-size: 0.9rem;">you owe $140</p>
+                            <span class="btn btn-primary fw-medium m-0 px-3" style="font-size: 0.8rem;">Pay</span>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="transactionHistory bg-white px-3 py-2 mt-3 rounded">
+                <div class="transactionHistoryTitle d-flex justify-content-sm-between justify-content-center align-items-center">
+                    <h4 class="fw-medium my-3" style="font-size: 1.1rem;">Transaction History</h4>
+                </div>
+                <div class="transactionList px-sm-4" id="paymentList">
+                    <div class="listItem d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center column-gap-3">
+                            <div class="pendingIcon">
+                                <span class="p-3 rounded-circle d-flex justify-content-center align-items-center" style="background-color:  rgb(225 228 255)">
+                                    <i class="fa-solid fa-file-invoice" style="color: #2a74f4;"></i>
+                                </span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <p class="m-0 fw-medium" style="font-size: 0.9rem;">Hotel Booking</p>
+                                <p class="m-0 fw-semibold text-secondary" style="font-size: 0.8rem;">May 12, 2025 . with Hawai Trip</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="m-0 fw-bold" style="font-size: 0.9rem;">$650.00</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="listItem d-flex align-items-center justify-content-between">
+                        <div class="d-flex align-items-center column-gap-3">
+                            <div class="pendingIcon">
+                                <span class="p-3 rounded-circle d-flex justify-content-center align-items-center" style="background-color:  rgb(191 255 195);">
+                                    <i class="fa-solid fa-money-bill-1-wave" style="color: #0db911;"></i>
+                                </span>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <p class="m-0 fw-medium" style="font-size: 0.9rem;">Hotel Booking</p>
+                                <p class="m-0 fw-semibold text-secondary" style="font-size: 0.8rem;">May 12, 2025 . with Hawai Trip</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p class="m-0 fw-bold text-danger" style="font-size: 0.9rem;">-$650.00</p>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer position-fixed bottom-0 start-0 end-0 bg-white">
+            <div class="navIcons px-md-5 col-12 d-flex justify-content-center align-items-center py-1 py-md-3">
+                <div class="col-10 d-flex justify-content-between align-items-center">
+                <div class="iconContainer ">
+                <a class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black" href="index.html">                
+                    <i class="bi bi-house-fill"></i>
+                        <p class="m-0 fw-light fs-6">Home</p>
+                </a> 
+                </div>
+                <div class="iconContainer ">
+                <a class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black" href="groups.html">                
+                    <i class="bi bi-people-fill"></i>
+                        <p class="m-0 fw-light fs-6">Groups</p>
+                </a> 
+                </div>
+                <div class="iconContainer ">
+                <a class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black" data-bs-toggle="modal" data-bs-target="#createGroupModal" href="#">                
+                    <i class="bi bi-plus-circle-fill"></i>
+                        <p class="m-0 fw-light fs-6">Add</p>
+                </a> 
+                </div>
+                <div class="iconContainer ">
+                <a class="d-flex flex-column justify-content-center align-items-center text-decoration-none text-black" href="balanceOverview.html">                
+                    <i class="fa-solid fa-scale-balanced text-primary"></i>
+                        <p class="m-0 fw-light fs-6 text-primary">Balance</p>
+                </a> 
+                </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script type="module" src="./js/balanceOverview.js"></script>
+    <script src="css/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="css/bootstrap/js/bootstrap.min.js"></script> -->
+</body>
+</html>

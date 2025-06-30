@@ -1,0 +1,30 @@
+/* Header */
+
+
+
+.header .userIconContainer {
+
+    width:30px;
+    height:30px;
+}
+.header .userIconContainer img {
+    width:100%;
+    height:100%;
+    border-radius:50%;
+}
+
+section{
+    margin-bottom: 100px;
+}
+.totalExpenses div h6, .totalBalance div h6{
+    font-size: 11px;
+}
+.totalAmount span{
+    font-size: larger;
+    
+}
+
+.iconContainer a:hover i,
+.iconContainer a:hover p {
+  color: #0d6efd;
+}
