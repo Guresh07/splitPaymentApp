@@ -46,6 +46,10 @@ export const totalMembers = (members) => {
 // };
 
 export const updateSplitAmounts = (members, paidPersonId, paidAmount, paidBy, owner) => {
+  console.log(members)
+  console.log(paidBy)
+  console.log(owner.name)
+
   const totalMembers = members.length;
   const baseSplit = Math.floor((paidAmount / totalMembers) * 100) / 100; // floor to 2 decimals
   const totalBaseSplit = baseSplit * totalMembers;

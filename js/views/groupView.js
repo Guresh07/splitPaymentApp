@@ -11,14 +11,14 @@ export function displayGroups() {
   container.innerHTML = "";
 
   groups.forEach(group => {
-    
+
     const mainUser = getData("mainUser");
     console.log(mainUser)
-    const owner = group.members.find(member =>member.name === mainUser.name || member.email === mainUser.email) || group.members[0];
+    const owner = group.members.find(member => member.name === mainUser.name || member.email === mainUser.email) || group.members[0];
     console.log("owner:", owner);
     console.log(group.expenses)
     const amountOwed = group.youOwed ? parseFloat(group.youOwed).toFixed(2) : "0.00";
-    const amountText = amountOwed >= 0 ? `owes you $${amountOwed}`: `you owe $${amountOwed}`;
+    const amountText = amountOwed >= 0 ? `owes you $${amountOwed}` : `you owe $${amountOwed}`;
     const colorClass = amountOwed >= 0 ? "text-success" : "text-danger";
 
     const div = document.createElement("div");
@@ -30,9 +30,9 @@ export function displayGroups() {
           <h6 class="m-0 ">${group.groupName}</h6>
           <p class="m-0 fw-semibold" style="font-size: 0.7rem;">${group.members.length} members</p>
           <p class="m-0 fw-semibold text-secondary" style="font-size: 0.75rem;">Created by: ${owner.name}</p>
-          ${ amountOwed == 0 &  group.totalAmount > 0 ? 
-            `<p class="m-0 fw-semibold  px-2 py-1 rounded-pill" style="font-size: 0.8rem; background-color: rgb(201 255 211); color: darkgreen;"><span>settled</span></p>`: 
-            `<p class="m-0 fw-semibold ${colorClass}" style="font-size: 0.8rem;">${amountText}</p>` }
+          ${amountOwed == 0 & group.totalAmount > 0 ?
+        `<p class="m-0 fw-semibold  px-2 py-1 rounded-pill" style="font-size: 0.8rem; background-color: rgb(201 255 211); color: darkgreen;"><span>settled</span></p>` :
+        `<p class="m-0 fw-semibold ${colorClass}" style="font-size: 0.8rem;">${amountText}</p>`}
           
         </div>
         <div class="totalAmmount d-flex flex-column justify-content-center align-items-end">
@@ -43,7 +43,7 @@ export function displayGroups() {
       <div class="d-flex  justify-content-between align-items-center">
       </div>
           `;
-          // <button data-group-id="${group.groupId}" class="btn btn-primary edit-group-btn " style="font-size: 0.5rem;" data-bs-toggle="modal" data-bs-target="#createGroupModal">Edit Group</button>
+    // <button data-group-id="${group.groupId}" class="btn btn-primary edit-group-btn " style="font-size: 0.5rem;" data-bs-toggle="modal" data-bs-target="#createGroupModal">Edit Group</button>
 
     container.prepend(div);
   });
@@ -69,20 +69,20 @@ export const renderRecentActivity = () => {
 
   // ✅ Combine both expenses and groups into one array
   const activities = [
-    ...expenses.map(expense => ({ 
-      type: "expense", 
-      date: expense.date, 
-      data: expense 
+    ...expenses.map(expense => ({
+      type: "expense",
+      date: expense.date,
+      data: expense
     })),
-    ...groups.map(group => ({ 
-      type: "group", 
-      date: group.date, 
-      data: group 
+    ...groups.map(group => ({
+      type: "group",
+      date: group.date,
+      data: group
     })),
-    ...payments.map(payment => ({ 
-      type: "payment", 
-      date: payment.date, 
-      data: payment 
+    ...payments.map(payment => ({
+      type: "payment",
+      date: payment.date,
+      data: payment
     }))
   ];
 
@@ -92,7 +92,7 @@ export const renderRecentActivity = () => {
   // ✅ Show latest 5 actions
   activities.slice(0, 5).forEach(activity => {
     const activityItem = document.createElement("div");
-    
+
     if (activity.type === "expense") {
       const expense = activity.data;
       activityItem.className = "activityDetails shadow-sm d-flex flex-column row-gap-1 px-3 mb-1 py-3 bg-white col-12 rounded";
@@ -102,26 +102,26 @@ export const renderRecentActivity = () => {
         </p>
         <p class="m-0 fw-semibold text-secondary" style="font-size: 0.8rem;">
           ${new Date(expense.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-          })}
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      })}
         </p>
       `;
     } else if (activity.type === "group") {
       const group = activity.data;
       activityItem.className = "activityDetails shadow-sm d-flex flex-column row-gap-1 px-3 mb-1 py-3 bg-white col-12 rounded";
-      activityItem.setAttribute("groupId",group.groupId)
+      activityItem.setAttribute("groupId", group.groupId)
       activityItem.innerHTML = `
         <p class="m-0 fw-medium" style="font-size: 0.9rem;">
           Group "${group.groupName}" is created.
         </p>
         <p class="m-0 fw-semibold text-secondary" style="font-size: 0.8rem;">
           ${new Date(group.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-          })}
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      })}
         </p>
       `;
     } else if (activity.type === "payment") {
@@ -136,10 +136,10 @@ export const renderRecentActivity = () => {
         </p>
         <p class="m-0 fw-semibold text-secondary" style="font-size: 0.8rem;">
           ${new Date(payment.date).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-          })}
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      })}
         </p>
       `;
     }
@@ -152,5 +152,5 @@ export const renderRecentActivity = () => {
 
 
 
-displayGroups();
-renderRecentActivity();
+
+

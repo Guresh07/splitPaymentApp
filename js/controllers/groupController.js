@@ -28,6 +28,9 @@ export const deleteGroup = (groupId) => {
  
 };
 
+displayGroups();
+renderRecentActivity();
+
 // export function openEditGroupModal(groupId) {
 //   const groups = getData("groups");
 //   const group = groups.find(g => g.groupId === groupId);

@@ -1,5 +1,6 @@
 import { deleteGroup } from "./controllers/groupController.js";
 import { addGroup } from "./controllers/groupController.js";
+import { getData } from "./utils/storage.js";
 // import {  openEditGroupModal } from "./controllers/groupController.js";
 // import { getData } from "./utils/storage.js";
 // import { renderPayments } from "./views/balanceView.js";
@@ -15,7 +16,7 @@ import { addGroup } from "./controllers/groupController.js";
 
 
 // Add More Members dynamically
-document.getElementById("addMoreMembers").addEventListener("click", function(e) {
+document.getElementById("addMoreMembers").addEventListener("click", function (e) {
   e.preventDefault();
   const membersList = document.getElementById("membersList");
 
@@ -34,7 +35,7 @@ document.getElementById("addMoreMembers").addEventListener("click", function(e) 
 });
 
 // Create Group button event
-document.getElementById("createGroupBtn").addEventListener("click", function() {
+document.getElementById("createGroupBtn").addEventListener("click", function () {
   const groupName = document.getElementById("groupName").value;
   const category = document.getElementById("category").value;
   const description = document.getElementById("description").value;
@@ -48,7 +49,7 @@ document.getElementById("createGroupBtn").addEventListener("click", function() {
 
     if (nameInput.value && emailInput.value) {
       members.push({
-        id: "m"+Date.now() + Math.floor(Math.random() * 1000),
+        id: "m" + Date.now() + Math.floor(Math.random() * 1000),
         name: nameInput.value,
         email: emailInput.value,
         youOwed: 0
@@ -63,7 +64,7 @@ document.getElementById("createGroupBtn").addEventListener("click", function() {
 
   if (groupName && members.length > 0) {
     addGroup(groupName, members, description, category);
-      // Close the modal
+    // Close the modal
     const createGroupModal = bootstrap.Modal.getInstance(document.getElementById("createGroupModal"));
     createGroupModal.hide();
   } else {
@@ -72,34 +73,29 @@ document.getElementById("createGroupBtn").addEventListener("click", function() {
 
 });
 
-console.log("hi")
+
 
 document.addEventListener("click", (e) => {
-  
+
   const card = e.target.closest(".groupCard");
-  
+
   // Handle delete button click
 
-    if (e.target.matches(".delete-group-btn")) {
-      e.stopPropagation();  // ⛔ Prevent card click event
-      const groupId = e.target.getAttribute("delete-group-id");
-      if (confirm("Are you sure you want to delete this group?")) {
-        deleteGroup(groupId);
-      }
-      return;  // Stop here — don't process further
+  if (e.target.matches(".delete-group-btn")) {
+    e.stopPropagation();
+    const groupId = e.target.getAttribute("delete-group-id");
+    if (confirm("Are you sure you want to delete this group?")) {
+      deleteGroup(groupId);
     }
+    return;  // Stop here — don't process further
+  }
 
 
 
-    // if (e.target.matches(".edit-group-btn")) {
-    //   e.stopPropagation();
-    //   const groupId = e.target.getAttribute("data-group-id");
-    //   openEditGroupModal(groupId);
-    //   return;
-    // }
 
-  
-  
+
+
+
   // Handle group card click
 
   if (card) {
@@ -122,6 +118,17 @@ document.addEventListener("click", (e) => {
   }
 });
 
+async function getGroups() {
+  try {
+    const response = await fetch("http://10.196.53.76:8000/groupdata/");
+    const data = await response.json();
+    console.log("Groups:", data);
+  } catch (error) {
+    console.error("Error fetching groups:", error);
+  }
+}
+
+getGroups();
 
 
 
@@ -131,7 +138,6 @@ document.addEventListener("click", (e) => {
 
 
 
- 
 
 
 
