@@ -20,6 +20,9 @@ export const renderPayments = (fromName) => {
     // alert("Group not found.");
     return;
   }
+
+
+
   const groupPayments = payments.filter(payment => payment.groupId === groupId);
   console.log(groupPayments);
 
@@ -28,15 +31,12 @@ export const renderPayments = (fromName) => {
   console.log(mainUser)
   let owner = group.members.find(member => member.name === mainUser.name || member.email === mainUser.email) || group.members[0];
   console.log("owner:", owner.name);
-  const members = group.members;
-
-
-
 
   const paidBySelect = document.getElementById("paymentTo");
   paidBySelect.innerHTML = ""; // clear existing options
 
   // Populate options with member names
+  const members = group.members;
   members.forEach(member => {
     if (member.name != fromName) {
       const option = document.createElement("option");
@@ -44,6 +44,8 @@ export const renderPayments = (fromName) => {
       paidBySelect.appendChild(option);
     }
   });
+
+
 
   const paymentContainer = document.getElementById("paymentList");
   if (!paymentContainer) return;
@@ -67,7 +69,7 @@ export const renderPayments = (fromName) => {
       // console.log(paymentGroup)
       const item = document.createElement("div");
       item.className = "listItem d-flex align-items-center justify-content-between mb-3";
-  
+
       item.innerHTML = `
         <div class="d-flex align-items-center column-gap-sm-3">
             <div class="pendingIcon">
@@ -89,7 +91,7 @@ export const renderPayments = (fromName) => {
             <p class="m-0 fw-bold" style="font-size: 0.9rem;">$${payment.amount}</p>
         </div>
       `;
-  
+
       paymentContainer.prepend(item);
     }
   });
@@ -107,10 +109,15 @@ export const getPaymentsData = (toId, amount) => {
 
   const mainUser = getData("mainUser");
   console.log(mainUser)
+
+  
   let owner = group.members.find(member => member.name === mainUser.name || member.email === mainUser.email) || group.members[0];
   console.log(toId);
   console.log(amount);
   console.log(members);
+
+
+
   const updatedMembers = balanceOverView(members, toId, amount);
   group.members = updatedMembers;
   console.log(updatedMembers)
@@ -119,13 +126,13 @@ export const getPaymentsData = (toId, amount) => {
   let amountMeOwes = totalMeOwes(updatedMembers);
 
   const totalAmount = document.querySelector(".totalOwesYou");
-  totalAmount.innerText = "$" + (amountOwesMe ? amountOwesMe : 0);
+  totalAmount.innerText = "$" + (amountOwesMe ? amountOwesMe : 0).toFixed(2);
 
   const totalAmountMeOwes = document.querySelector(".totalYouOwes");
   totalAmountMeOwes.innerText = "$" + (amountMeOwes ? amountMeOwes : 0).toFixed(2);
 
   const netBalance = document.querySelector(".netBalance");
-  netBalance.innerText = "$" + (amountOwesMe + amountMeOwes)
+  netBalance.innerText = "$" + (amountOwesMe + amountMeOwes).toFixed(2);
 
 
   const memberList = document.querySelector(".membersList");
@@ -141,14 +148,16 @@ export const getPaymentsData = (toId, amount) => {
     const colorClass = amountOwed >= 0 ? "text-success" : "text-danger";
 
     div.innerHTML = `
-      <div class="d-flex align-items-center justify-content-start">
+      <div class="d-flex align-items-center justify-content-start mx-2 mx-sm-0">
         <p class="fw-medium px-3 py-2 me-2 rounded-circle m-0" style="background-color: #e5e5ff">
           <span style="color: darkblue;">${initial}</span>
         </p>
         <p class="memberName m-0 fw-medium">${member.name === owner.name ? owner.name + "  (owner)" : member.name}</p>
       </div>
       <div class="amountGot d-flex align-items-center justify-content-end flex-wrap column-gap-2">
-        <p class="m-0 fw-medium ${colorClass}" style="font-size: 0.9rem;">${member.name === owner.name ? "" : amountText}</p>
+        ${amountOwed == 0 & group.totalAmount > 0 & member.name != owner.name ?
+        `<p class="m-0 fw-semibold  px-2 py-1 rounded-pill" style="font-size: 0.8rem; background-color: rgb(201 255 211); color: darkgreen;"><span>settled up</span></p>` :
+        `<p class="m-0 fw-semibold ${colorClass}" style="font-size: 0.8rem;">${member.name === owner.name ? "" : amountText}</p>`}
       </div>
 
   `;
@@ -164,7 +173,7 @@ export const getPaymentsData = (toId, amount) => {
     const amountGot = div.querySelector(".amountGot");
     if (amountGot.children[0].innerText != "") {
       if (amountOwed >= 0) {
-        amountGot.appendChild(notificationBell);
+        amountOwed ? " " :amountGot.appendChild(notificationBell);
       } else {
         amountGot.appendChild(payButton);
       }

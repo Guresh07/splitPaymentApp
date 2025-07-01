@@ -52,6 +52,7 @@ export function displayGroups() {
 
 
 
+
 export const renderRecentActivity = () => {
   const expenses = getData("expenses") || [];
   const groups = getData("groups") || [];

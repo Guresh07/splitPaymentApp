@@ -112,7 +112,7 @@ export const renderExpense = (paidPersonId, paidAmount, paidBy) => {
       <div class="amountGot ">
         
         ${amountOwed == 0 && member.name != owner.name ?
-        `<p class="m-0 fw-semibold  px-2 py-1 rounded-pill" style="font-size: 0.8rem; background-color: rgb(201 255 211); color: darkgreen;"><span>settled</span></p>` :
+        `<p class="m-0 fw-semibold  px-2 py-1 rounded-pill" style="font-size: 0.8rem; background-color: rgb(201 255 211); color: darkgreen;"><span>${amount > 0 ? "settled up" : "no payments yet" }</span></p>` :
         `<p class="m-0 fw-medium ${colorClass}" style="font-size: 0.9rem;">${member.name === owner.name ? "" : amountText}</p>`}
       </div>
   `;
