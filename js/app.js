@@ -118,17 +118,17 @@ document.addEventListener("click", (e) => {
   }
 });
 
-async function getGroups() {
-  try {
-    const response = await fetch("http://10.196.53.76:8000/groupdata/");
-    const data = await response.json();
-    console.log("Groups:", data);
-  } catch (error) {
-    console.error("Error fetching groups:", error);
-  }
-}
+// async function getGroups() {
+//   try {
+//     const response = await fetch("http://10.196.53.76:8000/groupdata/");
+//     const data = await response.json();
+//     console.log("Groups:", data);
+//   } catch (error) {
+//     console.error("Error fetching groups:", error);
+//   }
+// }
 
-getGroups();
+// getGroups();
 
 
 
